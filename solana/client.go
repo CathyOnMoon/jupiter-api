@@ -34,7 +34,7 @@ func (c *Client) SendTransaction(ctx context.Context, wallet *solana.Wallet, txB
 		return nil, fmt.Errorf("could not deserialize swap transaction: %w", err)
 	}
 	// 获取最近的区块哈希
-	latestBlockhash, err := c.rpcClient.GetLatestBlockhash(ctx, "")
+	latestBlockhash, err := c.rpcClient.GetLatestBlockhash(ctx, rpc.CommitmentFinalized)
 	if err != nil {
 		return nil, fmt.Errorf("could not get latest blockhash: %w", err)
 	}
