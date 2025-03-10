@@ -1,4 +1,4 @@
-module github.com/CathyOnMoon/jupiter-api
+module github.com/cathyonmoon/jupiter-api
 
 go 1.22.3
 

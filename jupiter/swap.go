@@ -3,8 +3,8 @@ package jupiter
 import (
 	"context"
 	"fmt"
-	"github.com/CathyOnMoon/jupiter-api/jupiter/model"
-	"github.com/CathyOnMoon/jupiter-api/utils"
+	"github.com/cathyonmoon/jupiter-api/jupiter/model"
+	"github.com/cathyonmoon/jupiter-api/utils"
 	"github.com/go-resty/resty/v2"
 	"net/url"
 )

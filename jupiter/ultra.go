@@ -3,7 +3,7 @@ package jupiter
 import (
 	"context"
 	"fmt"
-	"github.com/CathyOnMoon/jupiter-api/jupiter/model"
+	"github.com/cathyonmoon/jupiter-api/jupiter/model"
 	"net/url"
 )
 

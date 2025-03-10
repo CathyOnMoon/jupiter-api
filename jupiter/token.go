@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/CathyOnMoon/jupiter-api/jupiter/model"
+	"github.com/cathyonmoon/jupiter-api/jupiter/model"
 )
 
 func (c *Client) GetTokenPrice(ctx context.Context, addresses string) (*model.PriceAPIResponse, error) {
