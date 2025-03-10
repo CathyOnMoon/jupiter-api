@@ -1,10 +1,10 @@
-package client
+package jupiter
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"jupiter-api/model"
+	"github.com/CathyOnMoon/jupiter-api/jupiter/model"
 )
 
 func (c *Client) GetTokenPrice(ctx context.Context, addresses string) (*model.PriceAPIResponse, error) {

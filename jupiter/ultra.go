@@ -1,9 +1,9 @@
-package client
+package jupiter
 
 import (
 	"context"
 	"fmt"
-	"jupiter-api/model"
+	"github.com/CathyOnMoon/jupiter-api/jupiter/model"
 	"net/url"
 )
 

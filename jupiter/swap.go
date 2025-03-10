@@ -1,11 +1,11 @@
-package client
+package jupiter
 
 import (
 	"context"
 	"fmt"
+	"github.com/CathyOnMoon/jupiter-api/jupiter/model"
+	"github.com/CathyOnMoon/jupiter-api/utils"
 	"github.com/go-resty/resty/v2"
-	"jupiter-api/model"
-	"jupiter-api/utils"
 	"net/url"
 )
 
