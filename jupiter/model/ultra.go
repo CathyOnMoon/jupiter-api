@@ -10,28 +10,28 @@ type CreateOrderRequest struct {
 }
 
 type CreateOrderResponse struct {
-	SwapType                  string                `json:"swapType"`
-	Environment               string                `json:"environment"`
-	RequestID                 string                `json:"requestId"`
-	InAmount                  string                `json:"inAmount"`
-	OutAmount                 string                `json:"outAmount"`
-	OtherAmountThreshold      string                `json:"otherAmountThreshold"`
-	SwapMode                  string                `json:"swapMode"`
-	SlippageBps               int                   `json:"slippageBps"`
-	PriceImpactPct            string                `json:"priceImpactPct"`
-	RoutePlan                 []RoutePlan           `json:"routePlan"`
-	InputMint                 string                `json:"inputMint"`
-	OutputMint                string                `json:"outputMint"`
-	FeeBps                    int                   `json:"feeBps,omitempty"`
-	PlatformFee               *PlatformFee          `json:"platformFee"`
-	Taker                     string                `json:"taker,omitempty"`
-	Gasless                   bool                  `json:"gasless,omitempty"`
-	Transaction               string                `json:"transaction,omitempty"`
-	PrioritizationType        string                `json:"prioritizationType,omitempty"`
-	PrioritizationFeeLamports int                   `json:"prioritizationFeeLamports,omitempty"`
-	LastValidBlockHeight      int                   `json:"lastValidBlockHeight,omitempty"`
-	DynamicSlippageReport     DynamicSlippageReport `json:"dynamicSlippageReport,omitempty"`
-	TotalTime                 int                   `json:"totalTime"`
+	SwapType                  string                 `json:"swapType"`
+	Environment               string                 `json:"environment"`
+	RequestID                 string                 `json:"requestId"`
+	InAmount                  string                 `json:"inAmount"`
+	OutAmount                 string                 `json:"outAmount"`
+	OtherAmountThreshold      string                 `json:"otherAmountThreshold"`
+	SwapMode                  string                 `json:"swapMode"`
+	SlippageBps               int                    `json:"slippageBps"`
+	PriceImpactPct            string                 `json:"priceImpactPct"`
+	RoutePlan                 []RoutePlan            `json:"routePlan"`
+	InputMint                 string                 `json:"inputMint"`
+	OutputMint                string                 `json:"outputMint"`
+	FeeBps                    int                    `json:"feeBps,omitempty"`
+	PlatformFee               *PlatformFee           `json:"platformFee"`
+	Taker                     string                 `json:"taker,omitempty"`
+	Gasless                   bool                   `json:"gasless,omitempty"`
+	Transaction               string                 `json:"transaction,omitempty"`
+	PrioritizationType        string                 `json:"prioritizationType,omitempty"`
+	PrioritizationFeeLamports int                    `json:"prioritizationFeeLamports,omitempty"`
+	LastValidBlockHeight      int                    `json:"lastValidBlockHeight,omitempty"`
+	DynamicSlippageReport     *DynamicSlippageReport `json:"dynamicSlippageReport,omitempty"`
+	TotalTime                 int                    `json:"totalTime"`
 }
 
 func (r CreateOrderResponse) ToJson() (string, error) {
