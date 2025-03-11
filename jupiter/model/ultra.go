@@ -23,6 +23,7 @@ type CreateOrderResponse struct {
 	InputMint                 string                `json:"inputMint"`
 	OutputMint                string                `json:"outputMint"`
 	FeeBps                    int                   `json:"feeBps,omitempty"`
+	PlatformFee               *PlatformFee          `json:"platformFee"`
 	Taker                     string                `json:"taker,omitempty"`
 	Gasless                   bool                  `json:"gasless,omitempty"`
 	Transaction               string                `json:"transaction,omitempty"`
@@ -31,6 +32,14 @@ type CreateOrderResponse struct {
 	LastValidBlockHeight      int                   `json:"lastValidBlockHeight,omitempty"`
 	DynamicSlippageReport     DynamicSlippageReport `json:"dynamicSlippageReport,omitempty"`
 	TotalTime                 int                   `json:"totalTime"`
+}
+
+func (r CreateOrderResponse) ToJson() (string, error) {
+	jsonData, err := json.Marshal(r)
+	if err != nil {
+		return "", err
+	}
+	return string(jsonData), nil
 }
 
 type DynamicSlippageReport struct {
@@ -44,6 +53,11 @@ type DynamicSlippageReport struct {
 	FailedTxnEstSlippage         int     `json:"failedTxnEstSlippage,omitempty"`
 	PriceMovementEstSlippage     int     `json:"priceMovementEstSlippage,omitempty"`
 	EmaEstSlippage               int     `json:"emaEstSlippage,omitempty"`
+}
+
+type PlatformFee struct {
+	Amount string `json:"amount,omitempty"`
+	FeeBps int    `json:"feeBps,omitempty"`
 }
 
 type ExecuteOrderRequest struct {
