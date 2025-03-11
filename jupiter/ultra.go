@@ -4,10 +4,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/cathyonmoon/jupiter-api/jupiter/model"
+	"github.com/go-resty/resty/v2"
 	"net/url"
 )
 
-func (c *Client) CreateUltraOrder(ctx context.Context, request model.CreateOrderRequest) (*model.CreateOrderResponse, error) {
+func (c *Client) CreateUltraOrder(ctx context.Context, request model.CreateOrderRequest) (*model.CreateOrderResponse, *resty.Response, error) {
 	params := url.Values{}
 	params.Add("inputMint", request.InputMint)
 	params.Add("outputMint", request.OutputMint)
@@ -17,15 +18,12 @@ func (c *Client) CreateUltraOrder(ctx context.Context, request model.CreateOrder
 	var orderResponse model.CreateOrderResponse
 	resp, err := c.client.R().SetContext(ctx).SetResult(&orderResponse).Get(endpoint)
 	if err != nil {
-		return nil, err
+		return nil, resp, err
 	}
-	if resp.IsError() {
-		return nil, fmt.Errorf("failed to create order:%v", resp.StatusCode())
-	}
-	return &orderResponse, nil
+	return &orderResponse, resp, nil
 }
 
-func (c *Client) ExecuteUltraOrder(ctx context.Context, request model.ExecuteOrderRequest) (*model.ExecuteOrderResponse, error) {
+func (c *Client) ExecuteUltraOrder(ctx context.Context, request model.ExecuteOrderRequest) (*model.ExecuteOrderResponse, *resty.Response, error) {
 	endpoint := fmt.Sprintf("%s/ultra/v1/execute", c.client.BaseURL)
 	var executeOrderResponse model.ExecuteOrderResponse
 	resp, err := c.client.R().
@@ -37,10 +35,7 @@ func (c *Client) ExecuteUltraOrder(ctx context.Context, request model.ExecuteOrd
 		SetResult(&executeOrderResponse).
 		Post(endpoint)
 	if err != nil {
-		return nil, err
+		return nil, resp, err
 	}
-	if resp.IsError() {
-		return nil, fmt.Errorf("failed to execute order:%v", resp.StatusCode())
-	}
-	return &executeOrderResponse, nil
+	return &executeOrderResponse, resp, nil
 }
