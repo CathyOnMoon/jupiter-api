@@ -14,7 +14,7 @@ func TestClient_CreateUltraOrder(t *testing.T) {
 		Debug:   true,
 		//Proxy:   "https://7Mh7Hyrdx3Hb:QbFAPbhgzjePQ9U@superproxy.zenrows.com:1338",
 	})
-	result, err := client.CreateUltraOrder(context.Background(), model.CreateOrderRequest{
+	result, err, _ := client.CreateUltraOrder(context.Background(), model.CreateOrderRequest{
 		InputMint:  "So11111111111111111111111111111111111111112",
 		OutputMint: "7D9QsBnFcviLZbA8u7n6mF5k6NmN1pb3ZQwz9uiPpump",
 		Amount:     0.1 * 10e8,

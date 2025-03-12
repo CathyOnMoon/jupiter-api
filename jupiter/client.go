@@ -25,7 +25,7 @@ func NewClient(config Config) (*Client, error) {
 		return nil, errors.New("baseURL is required")
 	}
 	client.BaseURL = config.BaseURL
-	client.Debug = true
+	client.Debug = config.Debug
 	client.SetHeader("x-api-key", config.ApiKey)
 	client.SetTimeout(config.TimeOut)
 	if config.Proxy != "" {
