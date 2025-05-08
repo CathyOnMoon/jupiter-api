@@ -12,7 +12,6 @@ func TestClient_CreateUltraOrder(t *testing.T) {
 		ApiKey:  "",
 		BaseURL: "https://api.jup.ag",
 		Debug:   true,
-		//Proxy:   "https://7Mh7Hyrdx3Hb:QbFAPbhgzjePQ9U@superproxy.zenrows.com:1338",
 	})
 	result, err, _ := client.CreateUltraOrder(context.Background(), model.CreateOrderRequest{
 		InputMint:  "So11111111111111111111111111111111111111112",

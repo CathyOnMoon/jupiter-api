@@ -14,7 +14,7 @@ func (c *Client) GetQuote(ctx context.Context, request model.QuoteRequest) (*mod
 	for key, value := range utils.StructToValues(request) {
 		params.Add(key, value)
 	}
-	quoteApi := "/swap/v1/quote"
+	quoteApi := "/quote"
 	endpoint := fmt.Sprintf("%s%s?%s", c.client.BaseURL, quoteApi, params.Encode())
 	var quoteResponse model.QuoteResponse
 	resp, err := c.client.R().SetContext(ctx).SetResult(&quoteResponse).Get(endpoint)
@@ -28,7 +28,7 @@ func (c *Client) GetQuote(ctx context.Context, request model.QuoteRequest) (*mod
 }
 
 func (c *Client) PostSwap(ctx context.Context, request model.SwapRequest) (*model.SwapResponse, *resty.Response, error) {
-	swapApi := "/swap/v1/swap"
+	swapApi := "/swap"
 	endpoint := fmt.Sprintf("%s%s", c.client.BaseURL, swapApi)
 	var swapResponse model.SwapResponse
 	body, _ := request.ToJson()
