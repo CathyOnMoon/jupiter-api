@@ -26,7 +26,7 @@ func TestClient_GetWalletTokenAccount(t *testing.T) {
 	}
 	log.Println(account.Amount)
 
-	//result, err := client.rpcClient.GetTokenAccountBalance(ctx, account.Owner, rpc.CommitmentFinalized)
+	//result, err := client.RpcClient.GetTokenAccountBalance(ctx, account.Owner, rpc.CommitmentFinalized)
 	//if err != nil {
 	//	t.Error(err)
 	//	return

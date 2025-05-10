@@ -13,7 +13,7 @@ import (
 const defaultMaxRetries = uint(20)
 
 type Client struct {
-	rpcClient *rpc.Client
+	RpcClient *rpc.Client
 }
 
 func NewClient(rpcEndpoint string) (*Client, error) {
@@ -22,7 +22,7 @@ func NewClient(rpcEndpoint string) (*Client, error) {
 	}
 	rpcClient := rpc.New(rpcEndpoint)
 	c := &Client{
-		rpcClient: rpcClient,
+		RpcClient: rpcClient,
 	}
 	return c, nil
 }
@@ -34,7 +34,7 @@ func (c *Client) SendTransaction(ctx context.Context, wallet *solana.Wallet, txB
 		return nil, fmt.Errorf("could not deserialize swap transaction: %w", err)
 	}
 	// 获取最近的区块哈希
-	latestBlockhash, err := c.rpcClient.GetLatestBlockhash(ctx, rpc.CommitmentFinalized)
+	latestBlockhash, err := c.RpcClient.GetLatestBlockhash(ctx, rpc.CommitmentFinalized)
 	if err != nil {
 		return nil, fmt.Errorf("could not get latest blockhash: %w", err)
 	}
@@ -46,7 +46,7 @@ func (c *Client) SendTransaction(ctx context.Context, wallet *solana.Wallet, txB
 	}
 	// 发送交易到rpc
 	maxRetries := defaultMaxRetries
-	sig, err := c.rpcClient.SendTransactionWithOpts(ctx, &tx, rpc.TransactionOpts{
+	sig, err := c.RpcClient.SendTransactionWithOpts(ctx, &tx, rpc.TransactionOpts{
 		MaxRetries:          &maxRetries,
 		MinContextSlot:      &latestBlockhash.Context.Slot,
 		PreflightCommitment: rpc.CommitmentProcessed,
@@ -65,7 +65,7 @@ func (c *Client) CheckSignature(ctx context.Context, signatureStr string) (*TxSt
 		return nil, fmt.Errorf("could not convert signature from base58: %w", err)
 	}
 
-	status, err := c.rpcClient.GetSignatureStatuses(ctx, false, sig)
+	status, err := c.RpcClient.GetSignatureStatuses(ctx, false, sig)
 	if err != nil {
 		return nil, fmt.Errorf("could not get signature status: %w", err)
 	}
@@ -99,7 +99,7 @@ func (c *Client) CheckSignature(ctx context.Context, signatureStr string) (*TxSt
 
 func (c *Client) GetWalletAccount(ctx context.Context, walletAddress string) (*rpc.Account, error) {
 	account := solana.MustPublicKeyFromBase58(walletAddress)
-	result, err := c.rpcClient.GetAccountInfo(ctx, account)
+	result, err := c.RpcClient.GetAccountInfo(ctx, account)
 	if err != nil {
 		return nil, fmt.Errorf("获取钱包账户失败: %w", err)
 	}
@@ -114,7 +114,7 @@ func (c *Client) GetWalletTokenAccount(ctx context.Context, walletAddress string
 		log.Printf("failed to get associated token address: %v", err)
 		return nil, err
 	}
-	result, err := c.rpcClient.GetAccountInfo(ctx, ata)
+	result, err := c.RpcClient.GetAccountInfo(ctx, ata)
 	if err != nil {
 		return nil, fmt.Errorf("获取token账户失败: %w", err)
 	}
