@@ -61,19 +61,19 @@ type SwapInfo struct {
 }
 
 type SwapRequest struct {
-	UserPublicKey                 string                     `json:"userPublicKey"`
-	WrapAndUnwrapSol              bool                       `json:"wrapAndUnwrapSol,omitempty"`
-	UseSharedAccounts             bool                       `json:"useSharedAccounts,omitempty"`
-	FeeAccount                    string                     `json:"feeAccount,omitempty"`
-	TrackingAccount               string                     `json:"trackingAccount,omitempty"`
-	PrioritizationFeeLamports     *PrioritizationFeeLamports `json:"prioritizationFeeLamports,omitempty"`
-	AsLegacyTransaction           bool                       `json:"asLegacyTransaction,omitempty"`
-	DestinationTokenAccount       string                     `json:"destinationTokenAccount,omitempty"`
-	DynamicComputeUnitLimit       bool                       `json:"dynamicComputeUnitLimit,omitempty"`
-	SkipUserAccountsRpcCalls      bool                       `json:"skipUserAccountsRpcCalls,omitempty"`
-	DynamicSlippage               bool                       `json:"dynamicSlippage,omitempty"`
-	ComputeUnitPriceMicroLamports int                        `json:"computeUnitPriceMicroLamports,omitempty"`
-	QuoteResponse                 QuoteResponse              `json:"quoteResponse"`
+	UserPublicKey                 string        `json:"userPublicKey"`
+	WrapAndUnwrapSol              bool          `json:"wrapAndUnwrapSol,omitempty"`
+	UseSharedAccounts             bool          `json:"useSharedAccounts,omitempty"`
+	FeeAccount                    string        `json:"feeAccount,omitempty"`
+	TrackingAccount               string        `json:"trackingAccount,omitempty"`
+	PrioritizationFeeLamports     interface{}   `json:"prioritizationFeeLamports,omitempty"`
+	AsLegacyTransaction           bool          `json:"asLegacyTransaction,omitempty"`
+	DestinationTokenAccount       string        `json:"destinationTokenAccount,omitempty"`
+	DynamicComputeUnitLimit       bool          `json:"dynamicComputeUnitLimit,omitempty"`
+	SkipUserAccountsRpcCalls      bool          `json:"skipUserAccountsRpcCalls,omitempty"`
+	DynamicSlippage               bool          `json:"dynamicSlippage,omitempty"`
+	ComputeUnitPriceMicroLamports int           `json:"computeUnitPriceMicroLamports,omitempty"`
+	QuoteResponse                 QuoteResponse `json:"quoteResponse"`
 }
 
 func (r SwapRequest) ToJson() (string, error) {

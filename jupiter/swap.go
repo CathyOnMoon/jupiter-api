@@ -5,11 +5,10 @@ import (
 	"fmt"
 	"github.com/cathyonmoon/jupiter-api/jupiter/model"
 	"github.com/cathyonmoon/jupiter-api/utils"
-	"github.com/go-resty/resty/v2"
 	"net/url"
 )
 
-func (c *Client) GetQuote(ctx context.Context, request model.QuoteRequest) (*model.QuoteResponse, *resty.Response, error) {
+func (c *Client) GetQuote(ctx context.Context, request model.QuoteRequest) (*model.QuoteResponse, error) {
 	params := url.Values{}
 	for key, value := range utils.StructToValues(request) {
 		params.Add(key, value)
@@ -19,19 +18,22 @@ func (c *Client) GetQuote(ctx context.Context, request model.QuoteRequest) (*mod
 	var quoteResponse model.QuoteResponse
 	resp, err := c.client.R().SetContext(ctx).SetResult(&quoteResponse).Get(endpoint)
 	if err != nil {
-		return nil, resp, err
+		return nil, err
 	}
 	if resp.IsError() {
-		return nil, resp, fmt.Errorf("failed to get quote:%v", resp.StatusCode())
+		return nil, fmt.Errorf("failed to get quote. StatusCode: %d. Resp: %s", resp.StatusCode(), resp.String())
 	}
-	return &quoteResponse, resp, nil
+	return &quoteResponse, nil
 }
 
-func (c *Client) PostSwap(ctx context.Context, request model.SwapRequest) (*model.SwapResponse, *resty.Response, error) {
+func (c *Client) PostSwap(ctx context.Context, request model.SwapRequest) (*model.SwapResponse, error) {
 	swapApi := "/swap"
 	endpoint := fmt.Sprintf("%s%s", c.client.BaseURL, swapApi)
 	var swapResponse model.SwapResponse
-	body, _ := request.ToJson()
+	body, err := request.ToJson()
+	if err != nil {
+		return nil, err
+	}
 	resp, err := c.client.R().
 		SetContext(ctx).
 		SetHeader("Content-Type", "application/json").
@@ -39,10 +41,10 @@ func (c *Client) PostSwap(ctx context.Context, request model.SwapRequest) (*mode
 		SetResult(&swapResponse).
 		Post(endpoint)
 	if err != nil {
-		return nil, resp, err
+		return nil, err
 	}
 	if resp.IsError() {
-		return nil, resp, fmt.Errorf("failed to post swap:%v", resp.StatusCode())
+		return nil, fmt.Errorf("failed to post swap. StatusCode: %d. Resp: %s", resp.StatusCode(), resp.String())
 	}
-	return &swapResponse, resp, nil
+	return &swapResponse, nil
 }
